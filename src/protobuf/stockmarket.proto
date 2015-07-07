@@ -1,0 +1,76 @@
+// Stock Market Trading
+
+package StockMarket;
+
+// a simple message StockQuote
+message StockQuote {
+	required string uuid = 1;
+	required string symbol = 2;
+	required double timestamp =3;
+	required double open = 4;
+	required double high = 5;
+	required double low = 6;
+	required double close = 7;
+	required int64 volume = 8;
+	required double adjustedClose = 9;
+}
+
+// a simple StockQuote reponse
+message StockQuoteResponse {
+	repeated StockQuote result = 1;
+	//todo ID
+}
+
+// a simple StockQuote request
+message StockQuoteRequest {
+	required string symbol = 1;
+	required int64 start = 2;
+	required int64 end = 3;
+	//todo ID
+}
+
+// rpc wrapper to message
+message StockRPCRequest {
+  required string service = 1;
+  required string method = 2;
+  required bytes protobuf = 3;
+}
+
+message StockRPCResponse {
+  optional bytes protobuf = 1;
+  optional string error = 2;
+}
+
+enum RPCError {
+  NO_SERVICE = 1;
+  NO_METHOD = 2;
+  BAD_REQUEST = 3;
+}
+
+//some rpc call request and response messages
+message StockRPCAddRequest {
+  required uint32 func1 = 1;
+  required uint32 func2 = 2;
+}
+
+message StockRPCAddResponse {
+  required uint32 sum = 1;
+}
+
+message StockRPCReverseRequest {
+  required string to_reverse = 1;
+}
+
+message StockRPCReverseResponse {
+  required string reversed = 1;
+}
+
+// worker requests
+message StockWorkerRequest {
+  required string string_in = 1;
+}
+
+// worker responses
+message StockWorkerResponse {
+  required string string_out = 1;
+}
